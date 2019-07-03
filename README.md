@@ -1,5 +1,7 @@
 # Install
 
+This Ansible Playbook will install and configure VS Code, node.js (via nvm), emacs, and tmux.
+
 ## Get Ansible on Debian Stretch
 
 Taken from the [official instructions](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#latest-releases-via-apt-debian):
