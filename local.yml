@@ -1,8 +1,29 @@
-- hosts: penguin
+- hosts: localhost
   become: true
+  become_user: tbuckley
+
+  pre_tasks:
+  - name: Get username
+    local_action: command whoami
+    register: whoami_result
+ 
+  - set_fact:
+      setup_username: "{{ whoami_result.stdout }}"
 
   tasks:
-  - name: Install packages
-    apt: name={{item}}
-    with_items:
-    - tmux
+  - name: Install tmux
+    apt:
+      name: tmux
+
+  - debug:
+      msg: "Hello, {{ setup_username }}"
+
+  - name: Install nvm
+    shell: curl https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+    args:
+      creates: /home/{{ setup_username }}/.config/nvm.sh
+
+  - name: Set node version
+    shell: /bin/bash -c "source ~/.config/nvm.sh && nvm install stable"
+    args:
+      creates: /home/{{ setup_username }}/.config/versions/node
