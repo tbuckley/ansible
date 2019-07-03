@@ -1,0 +1,17 @@
+- name: Install dotfiles
+  hosts: local
+  pre_tasks:
+  - name: Get username
+    local_action: command whoami
+    register: whoami_result
+    tags: always
+
+  - set_fact:
+      dotfiles_username: "{{ whoami_result.stdout }}"
+    tags: always
+
+  roles:
+  - { role: gantsign.visual-studio-code, tags: ["vscode"] }
+  - { role: tmux, tags: ["tmux"] }
+  - { role: emacs, tags: ["emacs"] }
+  - { role: markosamuli.nvm }

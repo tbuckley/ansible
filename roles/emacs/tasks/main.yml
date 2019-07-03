@@ -1,0 +1,12 @@
+- name: Installs emacs
+  package:
+    name: emacs
+    state: present
+  become: yes
+  become_user: root
+
+- name: Symlink .emacs
+  file:
+    src: "~/ansible/roles/emacs/files/.emacs"
+    dest: "~/.emacs"
+    state: link

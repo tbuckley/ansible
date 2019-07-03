@@ -1,0 +1,6 @@
+- name: Installs tmux
+  package:
+    name: tmux
+    state: present
+  become: yes
+  become_user: root
