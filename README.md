@@ -26,3 +26,9 @@ Taken from the [official instructions](https://docs.ansible.com/ansible/latest/i
 2. `cd ansible`
 3. `ansible-galaxy install -r requirements.yml -p roles/`
 4. `ansible-playbook penguin.yml`
+
+## Final setup for git
+
+1. `git config --global user.name "NAME"`
+2. `git config --global user.email "EMAIL"`
+3. `ssh-keygen -t rsa -b 4096 -C "EMAIL"`
