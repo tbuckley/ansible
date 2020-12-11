@@ -2,30 +2,30 @@
 
 This Ansible Playbook will install and configure VS Code, node.js (via nvm), emacs, and tmux.
 
-## Get Ansible on Debian Stretch
+Ansible installation taken from the [official instructions](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#latest-releases-via-apt-debian):
 
-Taken from the [official instructions](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#latest-releases-via-apt-debian):
+## Run ansible.sh
 
-1. Install dependencies: `sudo apt install gnupg`
+```bash
+#!/bin/bash
 
-2. Add the following line to `/etc/apt/sources.list`:
-   ```
-   deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main
-   ```
+# Exit on any error
+set -e
 
-3. Then run these commands:
-   ```
-   $ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
-   $ sudo apt update
-   $ sudo apt install ansible
-   ```
+# Get ansible
+echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" >> /etc/ap
+t/sources.list
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
+apt update
+apt --yes install ansible
 
-## Run this playbook
-
-1. `git clone https://github.com/tbuckley/ansible.git`
-2. `cd ansible`
-3. `ansible-galaxy install -r requirements.yml -p roles/`
-4. `ansible-playbook penguin.yml`
+# Install ansible playbook & run
+git clone https://github.com/tbuckley/ansible.git
+pushd ansible
+ansible-galaxy install -r requirements.yml -p roles/
+ansible-playbook penguin.yml
+popd
+```
 
 ## Final setup for git
 
